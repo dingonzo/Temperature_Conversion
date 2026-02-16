@@ -80,7 +80,9 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Test
-      run: dotnet test TemperatureConverter/TemperatureConverter.csproj --configuration Release
+      run: |
+      $proj = Get-ChildItem -Recurse *.csproj | Select-Object -First 1
+      dotnet test $proj.FullName --configuration Release
       
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
